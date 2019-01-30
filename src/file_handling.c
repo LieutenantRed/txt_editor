@@ -32,7 +32,7 @@ char* load_tail(size_t poz, char** dest) {
 	
 	lseek(current_file.fd, poz, SEEK_SET);
 	read(current_file.fd, *dest, current_file.size - poz);
-
+	
 	return *dest;
 }
 
@@ -44,7 +44,6 @@ int insert_char(char ch, size_t poz) {
 		exit(EXIT_FAILURE);
 	}
 	pwrite(current_file.fd, &ch, 1, poz);
-	
 	pwrite(current_file.fd, tail, current_file.size - poz, poz + 1);
 	current_file.size = lseek(current_file.fd, 0L, SEEK_END);
 	return 0;
