@@ -15,6 +15,7 @@ void display() {
 	printw(content);
 	wmove(current_screen.scr, current_screen.cur_y, current_screen.cur_x);
 	refresh();
+
 	free(content);
 }
 
@@ -55,8 +56,14 @@ void move_left() {
 
 void k_press(int ch) {
 	insert_char((char)ch, current_file.offset);
-	current_screen.cur_x++;
-	current_file.offset++;
+	if (ch != '\n') {
+		current_screen.cur_x++;
+		current_file.offset++;
+	} else {
+		current_file.offset++;
+		current_screen.cur_x = 0;
+		current_screen.cur_y++;
+	}
 	display();
 }
 
@@ -87,12 +94,17 @@ int menu() {
 			break;
 		}
 	}
-	if ((ch = wgetch(stdscr)) == 'q') {
-		clear();
-		refresh();
-		return 0;
-	} else {
-		return menu();
+	switch (ch = wgetch(stdscr)) {
+		case 'q':
+			clear();
+			refresh();
+			return 0;
+		case 's':
+			save();
+			return menu();
+		default:
+			return menu();
+
 	}
 
 }

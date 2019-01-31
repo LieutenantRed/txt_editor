@@ -5,18 +5,23 @@
 
 #include "files.h"
 
+
 #define NAME_SIZE 200
 
 int main(int argc, char** argv) {
 	char* filename = (char*)malloc(sizeof(char) * NAME_SIZE);
+
 	if (argc > 1)
 		strcpy(filename, argv[1]);
 	else {
 		fprintf(stderr, "No input file.");
+		free(filename);
 		exit(EXIT_FAILURE);
 	}
+
 	if (init_file(filename) != 0) {
 		fprintf(stderr, "Error loading file");
+		free(filename);
 		exit(EXIT_FAILURE);
 	}	
 
@@ -28,6 +33,7 @@ int main(int argc, char** argv) {
 	menu();
 	endwin();
 	close_file();
+	
 	free(filename);
 	return 0;
 }

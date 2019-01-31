@@ -15,9 +15,9 @@
 #endif
 
 struct {
-	char* name;
-	int fd;
-	int size;
+	char* name; // original name
+	int fd; // tmp fp (original name + ".tmp")
+	int size; 
 	size_t offset;
 } current_file;
 
@@ -28,6 +28,7 @@ struct {
 
 // file handling
 int init_file(const char* filename);
+int save();
 char* load_content(char** dest);
 int insert_char(char ch, size_t poz);
 int delete_char(size_t poz);
