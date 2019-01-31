@@ -28,12 +28,14 @@ int main(int argc, char** argv) {
 	WINDOW* stdscr = initscr();
 	init_display(stdscr);
 	keypad(stdscr, TRUE);
+	printw(":q to exit, :s to save");
+	getch();
 	display();	
 		
 	menu();
-	endwin();
-	close_file();
 	
+	endwin();
+	close_file();	
 	free(filename);
 	return 0;
 }
