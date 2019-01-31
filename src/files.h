@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <ncurses.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 #ifndef BUFFER_SIZE 
 #define BUFFER_SIZE 1024

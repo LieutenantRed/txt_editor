@@ -19,13 +19,15 @@ int main(int argc, char** argv) {
 		fprintf(stderr, "Error loading file");
 		exit(EXIT_FAILURE);
 	}	
+
 	WINDOW* stdscr = initscr();
 	init_display(stdscr);
 	keypad(stdscr, TRUE);
 	display();	
 		
 	menu();
-
+	endwin();
 	close_file();
+	free(filename);
 	return 0;
 }
